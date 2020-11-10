@@ -1,0 +1,3 @@
+[Log] | [Day Mon DD YYYY HH:MM:SS TIMEZONE] | MSG
+[Warn] | [Day Mon DD YYYY HH:MM:SS TIMEZONE] | MSG
+[Error] | [Day Mon DD YYYY HH:MM:SS TIMEZONE] | MSG
