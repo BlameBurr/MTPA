@@ -1,7 +1,7 @@
 {
     "defaultLanguage": "en",
-    "discordToken": "Nzc1MzA5NjI3Mjc2Mzk0NTI3.X6kdWw.Qsykg641vCqdo1Ko5jXMXr4Er-k",
-    "ytAPIKey": "AIzaSyDwPjw5miLHk1BsQ0w2ZfRm46hZCRUCrnU",
+    "discordToken": "",
+    "ytAPIKey": "",
     "verbose": false,
     "defaultConfig": {
         "prefix": "!",
