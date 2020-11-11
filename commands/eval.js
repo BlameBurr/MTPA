@@ -3,7 +3,7 @@ const { Util, MessageEmbed } = require("discord.js");
 const utilModule = require("../modules/utils");
 const https = require("https");
 const http = require("http");
-const hastebin = require("hastebin-gen");
+const hastebin = require("hastebin-gen"); //Will replace in future
 
 class Eval extends Command {
     constructor(client) {
@@ -16,7 +16,7 @@ class Eval extends Command {
     }
 
     async run(client, message, args) {
-        if (message.author.id != "436928124521938954" && message.author.id != "775309177139625984") throw new Error(`Invalid permissions - this is an owner only command, sorry.`);
+        if (message.author.id != "") throw new Error(`Invalid permissions - this is an owner only command, sorry.`);
         let code = '';
         if (args.length < 1) { if (message.attachments.size == 1) code = await utilModule.request(message.attachments.entries().next().value[1].url) }
         else if (args.length == 1 && args[0].startsWith("http")) code = await utilModule.request(args[0]);
