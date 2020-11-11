@@ -2,7 +2,7 @@
     "defaultLanguage": "en",
     "discordToken": "DiscordToken",
     "ytAPIKey": "YTV3DataAPIKey",
-    "ownerIDs": []
+    "ownerIDs": [],
     "verbose": false,
     "defaultConfig": {
         "prefix": "!",
