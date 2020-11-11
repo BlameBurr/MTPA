@@ -1,5 +1,6 @@
 const Command = require("../modules/struct/command");
 const { Util, MessageEmbed } = require("discord.js");
+const { ownerIDs } = require("../resources/settings.json");
 const utilModule = require("../modules/utils");
 const https = require("https");
 const http = require("http");
@@ -16,7 +17,7 @@ class Eval extends Command {
     }
 
     async run(client, message, args) {
-        if (message.author.id != "") throw new Error(`Invalid permissions - this is an owner only command, sorry.`);
+        if (!ownerIDs.includes(message.author.id)) throw new Error(`Invalid permissions - this is an owner only command, sorry.`);
         let code = '';
         if (args.length < 1) { if (message.attachments.size == 1) code = await utilModule.request(message.attachments.entries().next().value[1].url) }
         else if (args.length == 1 && args[0].startsWith("http")) code = await utilModule.request(args[0]);
