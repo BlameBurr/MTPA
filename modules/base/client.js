@@ -33,14 +33,14 @@ class init extends Client {
 	
 	loadCommands() {
 		this.verbose(`Loading commands..`, 0);
-		loadFiles('../../commands', (name, commandFile) => {
+		loadFiles('./commands', (name, commandFile) => {
 			this.commands.set(commandFile.name.toLowerCase(), commandFile); // Adds to command map
 		});
 	}
 
 	loadEvents() {
 		this.verbose(`Loading events..`, 0);
-		loadFiles('../../events', (name, eventFile) => {
+		loadFiles('./events', (name, eventFile) => {
 			if (eventFile.disabled) return;
 			this.on(name, (...args) => (new eventFile(this)).run(this, ...args));
 		});
@@ -49,11 +49,12 @@ class init extends Client {
 
 function loadFiles(directory, callback) { // Reuses file loading and filtering because loadcmds and events was exactly the same except for 2 lines
 	fs.readdir(require('path').resolve(directory), (err, files) => { // Resolves relative path because FS uses absolute paths but it  couldn't have been absolute else we'd have to convert the require into a relative
+		if (err) return logHandler.error(err);
 		files.forEach(file => {
 			if (!file.toLowerCase().endsWith('.js')) return;
 			let name = file.split('.')[0];
-			let rFile = require(`${directory.replace(/\/+$/, '')}/${name}`) // Regex removes trailing forward slash
-			this.verbose(`Loaded ${name}`, 0);
+			let rFile = require(`../../${directory.replace(/\/+$/, '')}/${name}`) // Regex removes trailing forward slash
+			logHandler.verbose(`Loaded ${name}`, 0);
 			callback(name, rFile); // Run given function passing the file to it
 		});
 	});
