@@ -61,30 +61,3 @@ function loadFiles(directory, callback) { // Reuses file loading and filtering b
 }
 
 module.exports = init;
-
-
-/*loadCommands() {
-		fs.readdir('./commands/', (err, files) => {
-			files.forEach(file => {
-				if (!file.toLowerCase().endsWith('.js')) return;
-				let name = file.split('.')[0];
-				let commandFile = new (require(`../../commands/${name}`))(this);
-				this.verbose(`Loaded ${commandFile.name} command`, 0);
-				this.commands.set(commandFile.name.toLowerCase(), commandFile); // Adds to command map
-			}); // Iterates through directory and runs it through a callback function
-		});
-	}
-
-	loadEvents() {
-		fs.readdir('./events/', (err, files) => {
-			files.forEach(file => {
-				if (!file.toLowerCase().endsWith('.js')) return;
-				let name = file.split('.')[0];
-				let eventFile = require(`../../events/${name}`);
-				if (!eventFile.disabled) {
-					this.verbose(`Loaded ${name} event`, 0);
-					this.on(name, (...args) => (new eventFile(this)).run(this, ...args));
-				}
-			}); // Iterates through directory and runs it through a callback function
-		});
-	}*/
