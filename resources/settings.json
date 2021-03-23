@@ -1,9 +1,14 @@
 {
     "defaultLanguage": "en",
-    "discordToken": "DiscordToken",
-    "ytAPIKey": "YTV3DataAPIKey",
-    "ownerIDs": [],
-    "verbose": false,
+    "discordToken": "Discord TOKEN",
+    "ytAPIKey": "YTAPIKey",
+    "ownerIDs": ["ID ARRAY"],
+    "verbose": true,
+    "sslBypass": false,
+    "cpanelConfig": {
+        "port": 80,
+        "destinationIP": "Public IP/Local IP/Domain"
+    },
     "defaultConfig": {
         "prefix": "!",
         "invites": true
