@@ -34,7 +34,7 @@ class init extends Client {
 	loadCommands() {
 		this.verbose(`Loading commands..`, 0);
 		loadFiles('./commands', (name, commandFile) => {
-			this.commands.set(commandFile.name.toLowerCase(), commandFile); // Adds to command map
+			this.commands.set(commandFile.name.toLowerCase(), new commandFile(this)); // Adds to command map
 		});
 	}
 
