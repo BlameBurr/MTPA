@@ -37,7 +37,7 @@ class WebServer {
 
         this.app.use('/', this.router);
         
-	    this.app.listen(80, () => client.verbose(`CPanel listening on port ${config.cpanelConfig.port}`));
+	    this.app.listen(80, () => client.verbose(`CPanel listening on port ${config.cpanelConfig.port}`, 0));
     }
 
 }
