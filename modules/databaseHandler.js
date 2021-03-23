@@ -7,8 +7,6 @@ class DB {
 		this.db = new SQLite('./resources/guilds.db'); // I included it in the class so that I can interact with it using custom statements within commands if
 		let statement = 'CREATE TABLE IF NOT EXISTS guilds (guildID TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, region TEXT NOT NULL, prefix TEXT NOT NULL, invites INTEGER NOT NULL)';
 		this.db.prepare(statement).run();
-		statement = 'CREATE TABLE IF NOT EXISTS guildCMDConfig (guildID TEXT PRIMARY KEY NOT NULL, miscellaneous INTEGER NOT NULL, moderator INTEGER NOT NULL, utility INTEGER NOT NULL, music INTEGER NOT NULL, setup INTEGER NOT NULL, moderatorRole TEXT NOT NULL, utilityRole TEXT NOT NULL, musicRole TEXT NOT NULL, setupRole TEXT NOT NULL)';
-		this.db.prepare(statement).run();
 		this.db.pragma('synchronous = 1');
 		this.db.pragma('journal_mode = wal');
 		logHandler.verbose('Debug: Initialising database and ensuring that tables exist.', 0);
@@ -37,10 +35,8 @@ class DB {
 				logHandler.verbose(`Debug: Fetching guild information for: ${guildID}`, 0);
 				let statement = 'SELECT * FROM guilds WHERE guildID = ?';
 				let guildsResult = this.db.prepare(statement).get(guildID);
-				statement = 'SELECT * FROM guildCMDConfig WHERE guildID = ?';
-				let cmdsResult = this.db.prepare(statement).get(guildID);
-				if (cmdsResult == undefined || guildsResult == undefined) return undefined;
-				return {guildTable: guildsResult, guildCMDTable: cmdsResult};
+				if (guildsResult == undefined) return undefined;
+				return guildsResult;
 			},
 			add: (guild) => {
 				logHandler.verbose(`Debug: Adding guild (ID: ${guild.id}) to database`, 0);
@@ -51,8 +47,6 @@ class DB {
 			remove: (guildID) => {
 				logHandler.verbose(`Debug: Removing guild (ID: ${guildID}) from database`, 0);
 				let statement = 'DELETE FROM guilds WHERE guildID = ?';
-				this.db.prepare(statement).run(guildID);
-				statement = 'DELETE FROM guildCMDConfig WHERE guildID = ?';
 				this.db.prepare(statement).run(guildID);
 			},
 		};
