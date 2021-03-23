@@ -1,32 +1,37 @@
-const Command = require("../modules/struct/command");
-const { MessageEmbed } = require("discord.js");
-const musicHandler = new (require("../modules/musicHandler"));
+const Command = require('../modules/base/command');
+const { embed } = require('../modules/utils');
+const musicHandler = new (require('../modules/musicHandler'));
+const hastebin = require('hastebin-gen'); // Will replace in future
+const { UserError } = require('../modules/base/error');
 
 class Queue extends Command {
-    constructor(client) {
-        super(client);
-        this.name = "Queue";
-        this.aliases = ["q", "songs"];
-        this.description = "Returns the music queue."        
-        this.usage = "**queue**";
-    }
+	constructor(client) {
+		super(client);
+		this.name = 'Queue';
+		this.aliases = ['q', 'songs'];
+		this.category = 'Music';
+		this.description = 'Returns the music queue.';        
+		this.usage = '**queue**';
+	}
 
-    async run(client, message, args) {
-        if (args.length !== 0) throw new Error(`Invalid Usage - Correct Usage: ${this.settings.usage}`); //Enforces correct usage
-        let queue = musicHandler.getQueue(client, message);
-        let embed = new MessageEmbed()
-            .setAuthor("MTPA")
-            .setColor(message.guild.me.roles.highest.Color)
-            .setTimestamp(new Date)
-        if (queue.songs.length > 0) {
-            embed.addField("Now Playing", queue.songs[0].title, false);
-            embed.setThumbnail(queue.songs[0].thumbnail);
-            if (queue.songs.length > 1) {
-                embed.addField("Music Queue", queue.songs.filter((song, index) => index != 0).map((song, index) => `${index + 1}. ${song.title}`).join("\n"), false);
-            }
-        } else embed.addField("Music Queue", "Queue is empty, use the play command to add something to the queue.", false);
-        message.channel.send(embed);
-    }
-}//filter not map
+	async run(client, message, args) {
+		if (args.length !== 0) throw new UserError(`Invalid Usage - Correct Usage: ${this.usage}`); // Enforces correct usage
+		let queue = musicHandler.getQueue(client, message); // Get guild relevent queue stuff
+		let embedMsg = embed(message, 'Queue');
+		if (queue.songs.length > 0) {
+			embedMsg.addField('Now Playing', queue.songs[0].title, false);
+			embedMsg.setThumbnail(queue.songs[0].thumbnail);
+			if (queue.songs.length > 1) {
+				let formatted = queue.songs.filter((song, index) => index != 0).map((song, index) => `${index + 1}. ${song.title}`).join('\n');
+				if (formatted.length <= 1024) embedMsg.addField('Music Queue', formatted, false); // Adds filter formatted queue with numbering
+				else {
+					let id = await hastebin(formatted);
+					embedMsg.addField('Music Queue', id, false) // Adds hastebin url to embed
+				}
+			}
+		} else embedMsg.addField('Music Queue', 'Queue is empty, use the play command to add something to the queue.', false); // Adds that queue is empty
+		message.channel.send(embedMsg);
+	}
+}
 
 module.exports = Queue;

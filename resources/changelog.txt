@@ -1,0 +1,28 @@
+** 19/03/2021 Changelogs **
+• Finish commenting code
+• Clean and comment message event
+
+** TODO **
+• Improve RNG
+• Test user command
+• Finish coding website
+• Further testing
+• Add skip song number fn
+-------------------------------------------------------------------------------------------------
+** 11/03/2021 Changelogs **
+• Integrated API into website webserver
+• Added express router middleware to allow better API routing
+• Added changelog text file
+• Added better refreshing for website webpage to allow for easy updates via API
+• Added help command with search functions
+• Implemented common lib from NPM to improve string formatting
+• Nearly finished user command
+• Improved syntax check for commands
+• Add join date to user command
+-------------------------------------------------------------------------------------------------
+** 06/03/2021 Changelogs **
+• Integrated API into website webserver
+• Added express router middleware to allow better API routing
+• Added changelog text file
+• Added better refreshing for website webpage to allow for easy updates via API
+• Added help command with search functions

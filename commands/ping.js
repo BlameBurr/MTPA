@@ -1,19 +1,24 @@
-const Command = require("../modules/struct/command");
+const { embed } = require('../modules/utils');
+const Command = require('../modules/base/command');
+const { UserError } = require('../modules/base/error');
 
 class Ping extends Command {
-    constructor(client) {
-        super(client);
-        this.name = "Ping";
-        this.aliases = ["pong", "latency"];
-        this.description = "Returns the latency of the API."        
-        this.usage = "**ping**";
-        this.cooldown = 3000;
-    }
+	constructor(client) {
+		super(client);
+		this.name = 'Ping';
+		this.aliases = ['pong', 'latency'];
+		this.description = 'Returns the approximate latency of the API.';
+		this.usage = '**ping**';
+	}
 
-    async run(client, message, args) {
-        if (args.length !== 0) throw new Error(`Invalid Usage - Correct Usage: ${this.settings.usage}`); //Enforces correct usage
-        message.channel.send("Pong!"); //Output message
-    }
+	async run(client, message, args) {
+		if (args.length !== 0) throw new UserError(`Invalid Usage - Correct Usage: ${this.usage}`); // Enforces correct usage
+		let wsPing = client.ws.ping; // Gets websocket ping
+
+		let embedMsg = embed(message, 'Latency Results');
+		embedMsg.addField('Bot', `My latency is currently ${wsPing} ms`, false);
+		message.channel.send(embedMsg);
+	}
 }
 
 module.exports = Ping;

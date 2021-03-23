@@ -1,9 +1,11 @@
 {
   "name": "mtpa",
-  "version": "1.2.0",
+  "codename": "HSP",
+  "version": "1.4.3",
   "description": "NEA - Discord chat bot",
   "main": "index.js",
   "scripts": {
+    "start": "pm2 start index.js --max-memory-restart 2G",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,11 +16,16 @@
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "better-sqlite3": "^7.0.1",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
+    "cors": "^2.8.5",
     "discord.js": "^12.2.0",
+    "eslint": "^7.13.0",
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "googleapis": "^65.0.0",
     "hastebin-gen": "^2.0.5",
     "http": "0.0.1-security",
+    "pug": "^3.0.0",
     "sqlite3": "^4.2.0",
     "ytdl-core": "^4.0.3"
   }
