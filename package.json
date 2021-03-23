@@ -1,0 +1,33 @@
+{
+  "name": "mtpa",
+  "codename": "HSB",
+  "version": "1.4.3",
+  "description": "NEA - Discord chat bot",
+  "main": "index.js",
+  "dependencies": {
+    "better-sqlite3": "^7.1.2",
+    "chalk": "^4.1.0",
+    "common-tags": "^1.8.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "discord.js": "^12.5.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "googleapis": "^68.0.0",
+    "hastebin-gen": "^2.0.5",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "ini": "^1.3.8",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "pug-code-gen": "^3.0.2",
+    "util": "^0.12.3",
+    "ytdl-core": "^4.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James Walker",
+  "license": "BSD-2-Clause"
+}
