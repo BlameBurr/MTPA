@@ -1,7 +1,7 @@
 {
   "name": "mtpa",
   "codename": "HSB",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "NEA - Discord chat bot",
   "main": "index.js",
   "dependencies": {
