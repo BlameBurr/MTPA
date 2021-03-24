@@ -12,7 +12,7 @@ class Message extends Event {
 	async run(client, message) {
 		if (message.channel.type !== 'text' || message.author.bot) return; // Ignore if it's not sent to the right place or by a user
 		
-		if (await client.db.guild.get(message.guild.id) == null) client.db.guild.add(message.guild); // If not in db add it to db, this will catch events where it was added to a guild while offline
+		if (await client.db.guild.get(message.guild.id) == undefined) client.db.guild.add(message.guild); // If not in db add it to db, this will catch events where it was added to a guild while offline
 		
 		if (message.content.includes('discord.gg/')) {
 			if (!client.db.guild.get(message.guild.id).invites) { return message.delete(); } // If owner has it set to on, delete invites that are sent, toggle hasn't been implemented yet
@@ -31,10 +31,12 @@ class Message extends Event {
 		let currentTime = Date.now();
 		let cooldownTime = (fetchedCommand.cooldown);
 
-		if (!client.cooldowns.get(fetchedCommand.name)) client.cooldowns.set(fetchedCommand.name, new Collection()); // If there are no ongoing timeouts for the command setup the collectioon
+		let cooldowns = client.cooldowns;
 
-		if (client.cooldowns.get(fetchedCommand.name).has(message.author.id)) { // If the user has a timeout for that command already
-			let expTime = client.cooldowns.get(fetchedCommand.name).get(message.author.id) + cooldownTime; // Calculate expiration time
+		if (!cooldowns.get(fetchedCommand.name)) cooldowns.set(fetchedCommand.name, new Collection()); // If there are no ongoing timeouts for the command setup the collectioon
+
+		if (cooldowns.get(fetchedCommand.name).has(message.author.id)) { // If the user has a timeout for that command already
+			let expTime = cooldowns.get(fetchedCommand.name).get(message.author.id) + cooldownTime; // Calculate expiration time
 			if (currentTime < expTime) { // If it's not expired notify the user and delete their message to remove spam
 				let timeLeft = (expTime - currentTime) / 1000;
 				message.delete();
