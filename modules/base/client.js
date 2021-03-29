@@ -25,10 +25,9 @@ class init extends Client {
 	writeFile(type, text) { logHandler.writeFile(type, text); }
 
 	qotd() {
-		let unixTimestamp = new Date().getTime(); // Time since epoch, in ms
-		let day = unixTimestamp / 86400000; // Convert time into days to determine the days since epoch
-		let randomNumber = Math.round((quotes.length)*this.prng.lcg(day)); // Used LCG as XORshift needs four values
-		return quotes[randomNumber]; // Used for a quote of the day
+		let seed = Math.floor(new Date().getTime() / 86400000) * 17082003; // Time since epoch, in ms
+		let rndInt = Math.floor(this.prng.xorShift(seed).randInt() * quotes.length);
+		return quotes[rndInt];
 	}
 	
 	loadCommands() {
