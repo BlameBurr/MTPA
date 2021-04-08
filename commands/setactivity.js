@@ -18,8 +18,8 @@ class Setactivity extends Command {
 		let mode = args[0].toUpperCase(); // Converts case because this is the way the API accepts it
 		if (!['LISTENING', 'WATCHING', 'PLAYING'].includes(mode)) throw new UserError(`Invalid Usage - Correct Usage: ${this.usage}`); // Validity check
 		let activity = args.slice(1).join(' ');
-		client.user.setActivity(activity, { type: mode }); // Set activity
-		message.channel.send(`Activity has been set to ${mode.toLowerCase()} ${activity.toLowerCase()}`);
+		client.user.setActivity(activity, { 'type': mode }); // Set activity
+		await message.channel.send(`Activity has been set to ${mode.toLowerCase()} ${activity.toLowerCase()}`);
 	}
 }
 

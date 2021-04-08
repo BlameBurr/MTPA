@@ -9,7 +9,7 @@ class Ready extends Event {
 
 	run(client) {
 		client.log('Marvin the Paranoid Android is charged up and online!');
-		client.user.setActivity('life the universe and everything in it.', { type: 'LISTENING' });
+		client.user.setActivity('life the universe and everything in it.', { 'type': 'LISTENING' });
 		client.log(client.qotd());
 	}
 }

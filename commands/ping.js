@@ -13,11 +13,13 @@ class Ping extends Command {
 
 	async run(client, message, args) {
 		if (args.length !== 0) throw new UserError(`Invalid Usage - Correct Usage: ${this.usage}`); // Enforces correct usage
-		let wsPing = client.ws.ping; // Gets websocket ping
 
 		let embedMsg = embed(message, 'Latency Results');
-		embedMsg.addField('Bot', `My latency is currently ${wsPing} ms`, false);
-		message.channel.send(embedMsg);
+		let msg = await message.channel.send('**Pinging..**'); // Sends a message and stores the result as a message object for calculating different latencies later
+		embedMsg.addField('Latency', `${msg.createdTimestamp - message.createdTimestamp} ms`, true); // Latency between request and response for commands
+		embedMsg.addField('API', `${message.createdTimestamp - Date.now()} ms`, true); // Latency between receiving the event from the API and the event occuring
+		embedMsg.addField('Heartbeat', `${client.ws.ping} ms`, true); // Websocket heartbeat
+		msg.edit(embedMsg);
 	}
 }
 

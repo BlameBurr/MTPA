@@ -1,6 +1,6 @@
 const Command = require('../modules/base/command');
 const { embed } = require('../modules/utils');
-const musicHandler = new (require('../modules/musicHandler'));
+const musicHandler = new (require('../modules/musicHandler'))();
 const hastebin = require('hastebin-gen'); // Will replace in future
 const { UserError } = require('../modules/base/error');
 
@@ -10,7 +10,7 @@ class Queue extends Command {
 		this.name = 'Queue';
 		this.aliases = ['q', 'songs'];
 		this.category = 'Music';
-		this.description = 'Returns the music queue.';        
+		this.description = 'Returns the music queue.';
 		this.usage = '**queue**';
 	}
 
@@ -22,7 +22,8 @@ class Queue extends Command {
 			embedMsg.addField('Now Playing', queue.songs[0].title, false);
 			embedMsg.setThumbnail(queue.songs[0].thumbnail);
 			if (queue.songs.length > 1) {
-				let formatted = queue.songs.filter((song, index) => index != 0).map((song, index) => `${index + 1}. ${song.title}`).join('\n');
+				let formatted = queue.songs.filter((song, index) => index != 0).map((song, index) => `${index + 1}. ${song.title}`).
+join('\n');
 				if (formatted.length <= 1024) embedMsg.addField('Music Queue', formatted, false); // Adds filter formatted queue with numbering
 				else {
 					let id = await hastebin(formatted);

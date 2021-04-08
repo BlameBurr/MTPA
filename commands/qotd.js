@@ -7,7 +7,7 @@ class Qotd extends Command {
 		super(client);
 		this.name = 'QOTD';
 		this.aliases = ['quote', 'quoteoftheday'];
-		this.description = 'Returns the daily depressing quote from myself.';        
+		this.description = 'Returns the daily depressing quote from myself.';
 		this.usage = '**qotd**';
 		this.cooldown = 3000;
 	}
@@ -17,7 +17,7 @@ class Qotd extends Command {
 
 		let embedMsg = embed(message);
 		embedMsg.addField('QOTD', `Today's quote is: '${client.qotd()}'`, false); // Sends quote of the day
-		message.channel.send(embedMsg);
+		await message.channel.send(embedMsg);
 	}
 }
 

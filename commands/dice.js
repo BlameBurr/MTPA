@@ -13,11 +13,11 @@ class Dice extends Command {
 
 	async run(client, message, args) {
         if (args.length > 1) throw new UserError(`Invalid Usage - Correct Usage: ${this.usage}`); // Enforces correct usage
-        let range = (args.length == 1 && args[0] >= 6) ? args[0]+1 : 7;
-		let randomNumber = Math.floor(client.prng.xorShift()*range);
+        let range = (args.length == 1 && args[0] >= 6) ? args[0] + 1 : 7;
+		let randomNumber = Math.floor(client.prng.xorShift() * range);
 		let embedMsg = embed(message, 'Random Number Result');
-		embedMsg.addField('Output', `The random number is ${randomNumber}`, false);;
-		message.channel.send(embedMsg);
+		embedMsg.addField('Output', `The random number is ${randomNumber}`, false);
+		await message.channel.send(embedMsg);
 	}
 }
 

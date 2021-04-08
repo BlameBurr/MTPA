@@ -1,6 +1,7 @@
 const config = require('./resources/settings.json');
 const Client = require('./modules/base/client');
-const client = new Client({ autoReconnect: true, disableEveryone: 'everyone' });
+const client = new Client({ 'autoReconnect': true,
+'disableEveryone': 'everyone' });
 
 try {
 	let verbose = false;
@@ -9,6 +10,6 @@ try {
 	client.loadEvents();
 	client.loadCommands();
 	client.login(config.discordToken);
-} catch(err) {
+} catch (err) {
 	client.error(err);
 }

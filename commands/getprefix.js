@@ -13,8 +13,8 @@ class GetPrefix extends Command {
 
 	async run(client, message, args) {
 		if (args.length !== 0) throw new UserError(`Invalid Usage - Correct Usage: ${this.usage}`); // Enforces correct usage
-		let msgPrefix = client.db.prefix.get(message.guild.id); // Uses database module to fetch prefix
-		message.reply(`Your current prefix is ${msgPrefix}`);
+		let msgPrefix = await client.db.prefix.get(message.guild.id); // Uses database module to fetch prefix
+		await message.reply(`Your current prefix is ${msgPrefix}`);
 	}
 }
 

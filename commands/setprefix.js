@@ -12,9 +12,12 @@ class SetPrefix extends Command {
 
 	async run(client, message, args) {
 		if (args.length != 1) throw new UserError(`Invalid Usage - Correct Usage: ${this.usage}`); // Enforces correct usage
-		if (!message.member.hasPermission(['MANAGE_GUILD'], { checkAdmin: true, checkOwner: true })) throw new UserError(`Invalid Permissions - You require permission to manage the server.`); // Checks permissions
+		if (!message.member.hasPermission(['MANAGE_GUILD'], {
+			'checkAdmin': true,
+			'checkOwner': true
+		})) throw new UserError('Invalid Permissions - You require permission to manage the server.'); // Checks permissions
 		client.db.prefix.set(message.guild.id, args[0]); // Sets guild prefix
-		message.reply(`Your new prefix is ${args[0]}`);
+		await message.reply(`Your new prefix is ${args[0]}`);
 	}
 }
 
